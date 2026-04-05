@@ -1,0 +1,11 @@
+.env
+.venv/
+.claude/settings.local.json
+__pycache__/
+*.pyc
+
+# YOLO weights downloaded at runtime
+*.pt
+
+# Logged frames for future fine-tuning
+frames/

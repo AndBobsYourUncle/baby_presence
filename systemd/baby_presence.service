@@ -1,0 +1,24 @@
+[Unit]
+Description=Baby Presence Detector
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=baby_presence
+Group=baby_presence
+WorkingDirectory=/opt/baby_presence
+EnvironmentFile=/etc/baby_presence/baby_presence.env
+ExecStart=/opt/baby_presence/.venv/bin/python /opt/baby_presence/main.py
+Restart=on-failure
+RestartSec=5s
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/baby_presence /opt/baby_presence
+
+[Install]
+WantedBy=multi-user.target
