@@ -16,7 +16,7 @@ SERVICE_USER=baby_presence
 
 echo ">>> Installing system dependencies"
 apt-get update
-apt-get install -y python3 python3-venv python3-pip libglib2.0-0
+apt-get install -y python3 python3-venv python3-pip libglib2.0-0 libgl1
 
 echo ">>> Creating service user"
 if ! id "$SERVICE_USER" &>/dev/null; then
