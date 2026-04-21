@@ -77,6 +77,7 @@ def main() -> int:
     cfg = load()
 
     grabber = FrameGrabber(cfg.rtsp_url)
+    grabber.start()
     detector = PersonDetector(cfg.model_path, cfg.confidence)
     publisher = MQTTPublisher(
         host=cfg.mqtt_host,
