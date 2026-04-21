@@ -18,7 +18,7 @@ NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=strict
 ProtectHome=true
-ReadWritePaths=/var/lib/baby_presence /opt/baby_presence
+ReadWritePaths=/var/lib/baby_presence /opt/baby_presence /mnt
 
 [Install]
 WantedBy=multi-user.target
