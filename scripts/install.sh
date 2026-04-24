@@ -46,9 +46,17 @@ fi
 runuser -u "$SERVICE_USER" -- "$INSTALL_DIR/.venv/bin/pip" install --upgrade pip
 runuser -u "$SERVICE_USER" -- "$INSTALL_DIR/.venv/bin/pip" install -r "$INSTALL_DIR/requirements.txt"
 
-echo ">>> Pre-downloading YOLO weights (yolov8s.pt)"
-runuser -u "$SERVICE_USER" -- bash -c \
-    "cd '$INSTALL_DIR' && '$INSTALL_DIR/.venv/bin/python' -c 'from ultralytics import YOLO; YOLO(\"yolov8s.pt\")'"
+echo ">>> Checking for presence_model.pt"
+if [[ -f "$REPO_DIR/presence_model.pt" && -f "$REPO_DIR/presence_model.json" ]]; then
+    install -o "$SERVICE_USER" -g "$SERVICE_USER" -m 644 \
+        "$REPO_DIR/presence_model.pt" "$REPO_DIR/presence_model.json" \
+        "$INSTALL_DIR/"
+    echo ">>> Deployed model: $INSTALL_DIR/presence_model.pt"
+else
+    echo ">>> No presence_model.pt in repo root."
+    echo "    Copy presence_model.pt + presence_model.json into $INSTALL_DIR/"
+    echo "    before starting the service."
+fi
 
 echo ">>> Installing config"
 if [[ ! -f "$CONFIG_DIR/baby_presence.env" ]]; then

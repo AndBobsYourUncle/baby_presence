@@ -4,8 +4,14 @@
 __pycache__/
 *.pyc
 
-# YOLO weights downloaded at runtime
+# Model artifacts (YOLO weights downloaded at runtime, trained classifier + sidecar)
 *.pt
+presence_model.json
 
 # Logged frames for future fine-tuning
 frames/
+
+# Labeling artifacts + training dataset (personal, camera-specific)
+ranges.csv
+*.markers.json
+dataset/
